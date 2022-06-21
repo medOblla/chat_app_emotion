@@ -1,7 +1,9 @@
 import 'package:chatt_app/models/messages_model.dart';
+import 'package:chatt_app/utils/api_services.dart';
 import 'package:chatt_app/utils/colors.dart';
 import 'package:chatt_app/widgets/header.dart';
 import 'package:chatt_app/widgets/message_bubble.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
@@ -17,6 +19,16 @@ class _messageScreenState extends State<messageScreen> {
   static const Key messageKey = Key("123");
   final ScrollController _controller = ScrollController();
   TextEditingController messageController = TextEditingController();
+  late dynamic emotionModel;
+  final emotionDict = {
+    'joy' : ['😀', '😁', '😂', '🤣'],
+    'sad': ['😕', '🙁', '😣', '😫'],
+    'fear': ['😧', '😦', '😰', '😨'],
+    'anger': ['😠', '😤', '😡', '🤬'],
+    'disgust': ['😫', '😵', '🤢', '🤮'],
+    'surprise': ['😯', '😲', '😵', '🤯']
+  };
+  var detectedEmotion = 'neutral';
 
   _addItem(message msg) {
     setState(() {
@@ -24,42 +36,50 @@ class _messageScreenState extends State<messageScreen> {
     });
   }
 
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    messageController.addListener(_printLatestValue);
+  }
+
+  @override
+  void dispose() {
+
+    messageController.dispose();
+    super.dispose();
+  }
+
+  void _getData(msg) async {
+    emotionModel = (await ApiService().getEmotion(msg));
+    Future.delayed(const Duration(seconds: 1)).then((value) => setState(() {}));
+    if (kDebugMode) {
+      print(emotionModel);
+    }
+  }
+
+  void _printLatestValue() {
+    if (messageController.text.isNotEmpty){
+      if(messageController.text.length > 10){
+        _getData(messageController.text);
+      }else{
+        if (kDebugMode) {
+          print("SHORT TEXT");
+        }
+      }
+    }
+  }
+
   void _scrollDown() {
-    print("SCROOOOOOOOLING");
     _controller.jumpTo(_controller.position.maxScrollExtent);
   }
 
   @override
   Widget build(BuildContext context) {
     var height = MediaQuery.of(context).size.height;
-    var width = MediaQuery.of(context).size.width;
-    // Widget _chatBubbles({String message, bool isMe}) {
-    //   return Container(
-    //     padding: const EdgeInsets.only(left: 10, top: 18),
-    //     margin: isMe
-    //         ? const EdgeInsets.only(top: 8, bottom: 8, left: 100)
-    //         : const EdgeInsets.only(top: 8, bottom: 8, right: 100),
-    //     height: height * 0.07,
-    //     decoration: BoxDecoration(
-    //         borderRadius: BorderRadius.circular(5),
-    //         // color: isMe ? Colors.black12 : Colors.white,
-    //         gradient: isMe
-    //             ? LinearGradient(
-    //                 begin: Alignment.topLeft,
-    //                 end: Alignment.bottomRight,
-    //                 colors: [lightBlueColor, darkBlueColor])
-    //             : LinearGradient(colors: [Colors.black12, Colors.black12])),
-    //     child: Text(
-    //       message,
-    //       style:
-    //           TextStyle(color: txtColor, fontFamily: "MADType", fontSize: 17),
-    //     ),
-    //   );
-    // }
-
     return Scaffold(
         appBar: AppBar(
-          title: Text(""),
+          title: const Text(""),
           backgroundColor: bkgrdColor,
           actions: [
             IconButton(
@@ -140,30 +160,29 @@ class _messageScreenState extends State<messageScreen> {
               height: height * 0.07,
               child: Row(
                 children: [
-                  // Container(
-                  //   height: 38,
-                  //   width: 38,
-                  //   decoration: BoxDecoration(
-                  //       shape: BoxShape.circle,
-                  //       gradient: LinearGradient(
-                  //           colors: [lightBlueColor, darkBlueColor])),
-                  //   child: Center(
-                  //     child: Padding(
-                  //       padding: const EdgeInsets.only(right: 10),
-                  //       child: IconButton(
-                  //         icon: Icon(Icons.add, color: Colors.white),
-                  //         onPressed: () {},
-                  //       ),
-                  //     ),
-                  //   ),
-                  // ),
                   IconButton(
                     icon: Icon(
                       Icons.emoji_emotions,
                       color: txtColor,
                       size: 33,
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      setState(() {
+                        if(emotionModel != null){
+                          try{
+                            messageController.text = messageController.text + emotionDict[emotionModel]![0];
+                          }on Exception catch (_, ex){
+                            if (kDebugMode) {
+                              print(ex);
+                            }
+                          }
+                        }else{
+                          if (kDebugMode) {
+                            print("EMPTY");
+                          }
+                        }
+                      });
+                    },
                   ),
                   IconButton(
                     icon: Icon(Icons.camera_alt_rounded, color: blackText),
