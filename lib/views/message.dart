@@ -22,11 +22,12 @@ class _messageScreenState extends State<messageScreen> {
   late dynamic emotionModel;
   final emotionDict = {
     'joy' : ['😀', '😁', '😂', '🤣'],
-    'sad': ['😕', '🙁', '😣', '😫'],
+    'sadness': ['😕', '🙁', '😣', '😫'],
     'fear': ['😧', '😦', '😰', '😨'],
     'anger': ['😠', '😤', '😡', '🤬'],
-    'disgust': ['😫', '😵', '🤢', '🤮'],
-    'surprise': ['😯', '😲', '😵', '🤯']
+    //'disgust': ['😫', '😵', '🤢', '🤮'],
+    //'surprise': ['😯', '😲', '😵', '🤯']
+    'neutral': ['😕', '🙁', '😣', '😫'],
   };
   var detectedEmotion = 'neutral';
 
