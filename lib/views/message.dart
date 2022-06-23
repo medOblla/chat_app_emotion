@@ -46,7 +46,6 @@ class _messageScreenState extends State<messageScreen> {
 
   @override
   void dispose() {
-
     messageController.dispose();
     super.dispose();
   }

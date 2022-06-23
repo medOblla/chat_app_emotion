@@ -1,6 +1,7 @@
 import 'package:chatt_app/utils/colors.dart';
 import 'package:chatt_app/views/message.dart';
 import 'package:chatt_app/views/notification.dart';
+import 'package:chatt_app/views/proba_page.dart';
 import 'package:fluttericon/iconic_icons.dart';
 
 import 'package:chatt_app/views/homePage.dart';
@@ -14,7 +15,7 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   int selectedIndex = 0;
   final PageController _pageController = PageController();
-  List<Widget> pages = [const HomePage(), const messageScreen(), const NotificationPage()];
+  List<Widget> pages = [const HomePage(), const messageScreen(), const NotificationPage(), const ProbaPage('neutral')];
   void _onChanged(index) {
     setState(() {
       selectedIndex = index;
