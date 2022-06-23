@@ -6,6 +6,8 @@ import 'package:fluttericon/brandico_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttericon/iconic_icons.dart';
 
+import 'big_text.dart';
+
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
 
@@ -17,6 +19,10 @@ class _HomePageState extends State<HomePage> {
   @override
   initState() {
     super.initState();
+  }
+
+  void _navigateToNextScreen(BuildContext context) {
+    Navigator.of(context).push(MaterialPageRoute(builder: (context) => BigText(key: widget.key)));
   }
 
   showOverLay(context) async {
@@ -72,9 +78,11 @@ class _HomePageState extends State<HomePage> {
       ),
       floatingActionButton: FloatingActionButton(
           onPressed: () {
-            setState(() {
-              showOverLay(context);
-            });
+            // setState(() {
+            //   showOverLay(context);
+            // });
+            _navigateToNextScreen(context);
+
           },
           tooltip: "Add new contact",
           child: Container(
@@ -88,7 +96,7 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
             child: const Icon(
-              Iconic.aperture,
+              Icons.add,
               color: Colors.white,
             ),
           )),

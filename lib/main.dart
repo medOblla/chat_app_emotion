@@ -8,7 +8,7 @@ void main() {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   runApp(MaterialApp(
-    home: BigText(),
+    home: Home(),
     debugShowCheckedModeBanner: false,
     //Set themedata darkMode and LightMode
     theme: ThemeData(

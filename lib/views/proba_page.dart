@@ -8,7 +8,7 @@ import 'package:flutter/foundation.dart';
 import 'package:fluttericon/brandico_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttericon/iconic_icons.dart';
-
+import 'package:chatt_app/utils/constants.dart';
 import '../utils/api_services.dart';
 
 class ProbaPage extends StatefulWidget {
@@ -96,7 +96,7 @@ class _ProbaPageState extends State<ProbaPage> {
                           children: [
                             Card(
                                 elevation: 20,
-                                color: Colors.amber,
+                                color: Colors.green,
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(20),
                                 ),
@@ -107,16 +107,25 @@ class _ProbaPageState extends State<ProbaPage> {
                                       child: Column(
                                         mainAxisAlignment: MainAxisAlignment.center,
                                         children: [
-                                          const Icon(Icons.emoji_emotions, size: 70, color: Colors.red,),
+                                          Container(
+                                            height: 70,
+                                            width: 70,
+                                            decoration: const BoxDecoration(
+                                                shape: BoxShape.circle,
+                                                color: Colors.transparent,
+                                                image: DecorationImage(
+                                                    fit: BoxFit.cover, image: AssetImage('images/happy.png'))),
+                                            child: null,
+                                          ),
                                           const SizedBox(height: 20.0,),
-                                          Text('${double.tryParse(data['joy'])?.toStringAsFixed(2)}% Happy', style: const TextStyle(fontSize: 18))
+                                          Text('${double.tryParse(data['joy'])?.toStringAsFixed(2)}% Happy', style: const TextStyle(fontSize: 18, color: Colors.white, fontWeight: FontWeight.bold))
                                         ],
                                       )
                                   ),
                                 )),
                             Card(
                                 elevation: 20,
-                                color: Colors.amber,
+                                color: Colors.blueGrey,
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(20),
                                 ),
@@ -127,9 +136,18 @@ class _ProbaPageState extends State<ProbaPage> {
                                       child: Column(
                                         mainAxisAlignment: MainAxisAlignment.center,
                                         children: [
-                                          const Icon(Icons.emoji_emotions, size: 70, color: Colors.red,),
+                                          Container(
+                                            height: 70,
+                                            width: 70,
+                                            decoration: const BoxDecoration(
+                                                shape: BoxShape.circle,
+                                                color: Colors.transparent,
+                                                image: DecorationImage(
+                                                    fit: BoxFit.cover, image: AssetImage('images/sad.png'))),
+                                            child: null,
+                                          ),
                                           const SizedBox(height: 20.0,),
-                                          Text('${double.tryParse(data['sadness'])?.toStringAsFixed(2)}% Sad', style: const TextStyle(fontSize: 18))
+                                          Text('${double.tryParse(data['sadness'])?.toStringAsFixed(2)}% Sad', style: const TextStyle(fontSize: 18, color: Colors.white, fontWeight: FontWeight.bold))
                                         ],
                                       )
                                   ),
@@ -144,7 +162,7 @@ class _ProbaPageState extends State<ProbaPage> {
                           children: [
                             Card(
                                 elevation: 20,
-                                color: Colors.amber,
+                                color: Colors.amberAccent,
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(20),
                                 ),
@@ -155,16 +173,25 @@ class _ProbaPageState extends State<ProbaPage> {
                                       child: Column(
                                         mainAxisAlignment: MainAxisAlignment.center,
                                         children: [
-                                          const Icon(Icons.emoji_emotions, size: 70, color: Colors.red,),
+                                          Container(
+                                            height: 70,
+                                            width: 70,
+                                            decoration: const BoxDecoration(
+                                                shape: BoxShape.circle,
+                                                color: Colors.transparent,
+                                                image: DecorationImage(
+                                                    fit: BoxFit.cover, image: AssetImage('images/fear.png'))),
+                                            child: null,
+                                          ),
                                           const SizedBox(height: 20.0,),
-                                          Text('${double.tryParse(data['fear'])?.toStringAsFixed(2)}% Fearful', style: const TextStyle(fontSize: 18))
+                                          Text('${double.tryParse(data['fear'])?.toStringAsFixed(2)}% Fearful', style: const TextStyle(fontSize: 18, color: Colors.white, fontWeight: FontWeight.bold))
                                         ],
                                       )
                                   ),
                                 )),
                             Card(
                                 elevation: 20,
-                                color: Colors.amber,
+                                color: Colors.redAccent,
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(20),
                                 ),
@@ -175,9 +202,18 @@ class _ProbaPageState extends State<ProbaPage> {
                                       child: Column(
                                         mainAxisAlignment: MainAxisAlignment.center,
                                         children: [
-                                          const Icon(Icons.emoji_emotions, size: 70, color: Colors.red,),
+                                          Container(
+                                            height: 70,
+                                            width: 70,
+                                            decoration: const BoxDecoration(
+                                                shape: BoxShape.circle,
+                                                color: Colors.transparent,
+                                                image: DecorationImage(
+                                                    fit: BoxFit.cover, image: AssetImage('images/angry.png'))),
+                                            child: null,
+                                          ),
                                           const SizedBox(height: 20.0,),
-                                          Text('${double.tryParse(data['anger'])?.toStringAsFixed(2)}% Angry', style: const TextStyle(fontSize: 18))
+                                          Text('${double.tryParse(data['anger'])?.toStringAsFixed(2)}% Angry', style: const TextStyle(fontSize: 18, color: Colors.white, fontWeight: FontWeight.bold))
                                         ],
                                       )
                                   ),
